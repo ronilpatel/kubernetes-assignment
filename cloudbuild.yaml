@@ -7,11 +7,15 @@ steps:
 
 # This step will deploy the new container image to cloud run
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'gke-sample-app',
-         '--image', 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app',
-         '--region', 'us-east1', '--allow-unauthenticated', '--platform', 'managed']
+  args:
+    - 'run'
+    - 'deploy'
+    - 'gke-sample-app'
+    - '--image'
+    - 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest'
+    - '--region'
+    - 'us-east1'
+    - '--platform'
+    - 'managed'
 images:
 - 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest'
-
-env:
-    - 'CLOUDSDK_CORE_DISABLE_PROMPTS=1'
