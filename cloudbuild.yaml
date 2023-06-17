@@ -17,5 +17,7 @@ steps:
     - 'us-east1'
     - '--platform'
     - 'managed'
+    - '--port'
+    - '9999'
 images:
 - 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest'
