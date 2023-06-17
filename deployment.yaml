@@ -1,22 +1,104 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: my-deployment
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: my-app
+#  template:
+#    metadata:
+#      labels:
+#        app: my-app
+#    spec:
+#      containers:
+#      - name: sample-flask-container
+#        image: us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/container1:latest
+#        ports:
+#        - containerPort: 8080
+#        env:
+#        - name: PORT
+#          value: "8080"
+
+
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-deployment
+  name: helloworld-gke
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-app
+      app: hello
   template:
     metadata:
       labels:
-        app: my-app
+        app: hello
     spec:
       containers:
-      - name: sample-flask-container
+      - name: hello-app
+        # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
+        # Replace $GCLOUD_PROJECT with your project ID.
         image: us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/container1:latest
+        # This app listens on port 8080 for web traffic by default.
         ports:
         - containerPort: 8080
         env:
-        - name: PORT
-          value: "8080"
+          - name: PORT
+            value: "8080"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+            ephemeral-storage: "1Gi"
+---
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# The hello service provides a load-balancing proxy over the hello-app
+# pods. By specifying the type as a 'LoadBalancer', Kubernetes Engine will
+# create an external HTTP load balancer.
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+spec:
+  type: LoadBalancer
+  selector:
+    app: hello
+  ports:
+  - port: 80
+    targetPort: 8080
+---
