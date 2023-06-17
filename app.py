@@ -29,8 +29,10 @@ def validate_file_data(payload):
 def calculate_sum():
     data = request.get_json()
     if validate_request(data):
+        # if path.exists("/Ronil_PV_dir/" + data['file']):
         if path.exists("/Ronil_PV_dir/" + data['file']):
             res = requests.post("http://hello2service:80/calculate_sum", json=data)
+            # res = requests.post("http://127.0.0.1:9090/calculate_sum", json=data)
             return json.loads(res.text)
         else:
             return json.loads('{"file": "' + data['file'] + '", "error": "File not found."}')
@@ -44,12 +46,14 @@ def store_file_to_persistent():
 
     if validate_file_data(data):
         try:
-            with open("/Ronil_PV_dir/" + data.get("file"), "w") as f:
-            # with open("/home/" + data.get("file"), "w") as f:
+            # with open("/Ronil_PV_dir/" + data.get("file"), "w") as f:
+            file_name = "/Ronil_PV_dir/" + data.get("file")
+            with open(file_name, "w") as f:
                 f.write(data.get("data"))
             return json.loads(
                 '{"file": "' + data.get("file") + '", "message": "Success."}')
-        except:
+        except Exception as e:
+            print(str(e))
             return json.loads('{"file": "' + data.get("file") + '", "error": "Error while storing the file to the storage."}')
     else:
         return json.loads('{"file": null, "error": "Invalid JSON input."}')
