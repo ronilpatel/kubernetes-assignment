@@ -96,7 +96,7 @@ kind: Service
 metadata:
   name: hello
 spec:
-  type: C
+  type: LoadBalancer
   selector:
     app: hello
   ports:
