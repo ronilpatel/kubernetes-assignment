@@ -1,0 +1,12 @@
+steps:
+# This step will build and push new container image to "google artifact registry(GAR)"
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app']
+
+# This step will deploy the new container image to cloud run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'gke-sample-app-service',
+         '--image=us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app',
+         '--region=us-east1', '--allow-unauthenticated']
