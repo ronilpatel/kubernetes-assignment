@@ -20,8 +20,7 @@ def validate_request(payload):
 
 
 def validate_file_data(payload):
-    if payload and "file" in payload and payload['file'] is not None and payload['file'] != "" and \
-            payload['data'] and payload["data"][:15] == "product, amount":
+    if payload and "file" in payload and payload['file'] is not None and payload['file'] != "" and payload['data']:
         return True
     return False
 
