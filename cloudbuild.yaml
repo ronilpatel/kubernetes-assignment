@@ -10,3 +10,5 @@ steps:
   args: ['run', 'deploy', 'gke-sample-app',
          '--image=us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app',
          '--region=us-east1', '--allow-unauthenticated']
+images:
+- 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest'
