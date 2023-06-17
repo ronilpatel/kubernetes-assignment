@@ -12,3 +12,6 @@ steps:
          '--region', 'us-east1', '--allow-unauthenticated', '--platform', 'managed']
 images:
 - 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest'
+
+env:
+    - 'CLOUDSDK_CORE_DISABLE_PROMPTS=1'
