@@ -1,23 +1,20 @@
 steps:
 # This step will build and push new container image to "google artifact registry(GAR)"
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app', '.']
+  args: ['build', '-t', 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/container1:latest', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app']
+  args: ['push', 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/container1:latest']
 
-# This step will deploy the new container image to cloud run
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-    - 'run'
-    - 'deploy'
-    - 'gke-sample-app'
-    - '--image'
-    - 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest'
-    - '--region'
-    - 'us-east1'
-    - '--platform'
-    - 'managed'
-    - '--port'
-    - '9999'
+## This step will deploy the new container image to cloud run
+#- name: 'gcr.io/cloud-builders/gcloud'
+#  args:
+#    - 'run'
+#    - 'deploy'
+#    - 'gke-sample-app'
+#    - '--image'
+#    - 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest'
+#    - '--region'
+#    - 'us-east1'
+
 images:
-- 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest'
+- 'us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/container1:latest'
