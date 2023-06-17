@@ -31,7 +31,7 @@ def calculate_sum():
     data = request.get_json()
     if validate_request(data):
         if path.exists("/Ronil_PV_dir/" + data['file']):
-            res = requests.post("http://c2:5000/calculate_sum", json=data)
+            res = requests.post("http://hello2service:80/calculate_sum", json=data)
             return json.loads(res.text)
         else:
             return json.loads('{"file": "' + data['file'] + '", "error": "File not found."}')
