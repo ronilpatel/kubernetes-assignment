@@ -91,12 +91,12 @@ spec:
         persistentVolumeClaim:
           claimName: my-pvc
 ---
-
+apiVersion: v1
 kind: Service
 metadata:
   name: hello
 spec:
-  type: LoadBalancer
+  type: C
   selector:
     app: hello
   ports:
