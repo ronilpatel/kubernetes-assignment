@@ -14,6 +14,9 @@ spec:
     spec:
       containers:
       - name: sample-flask-container
-        image: us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/gke-sample-app:latest
+        image: us-east1-docker.pkg.dev/assignment-kubernetes-390016/assignment-kubernetes/container1:latest
         ports:
-        - containerPort: 9999
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
