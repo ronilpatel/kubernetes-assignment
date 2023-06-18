@@ -29,10 +29,8 @@ def validate_file_data(payload):
 def calculate_sum():
     data = request.get_json()
     if validate_request(data):
-        # if path.exists("/Ronil_PV_dir/" + data['file']):
         if path.exists("/Ronil_PV_dir/" + data['file']):
             res = requests.post("http://hello2service:80/calculate_sum", json=data)
-            # res = requests.post("http://127.0.0.1:9090/calculate_sum", json=data)
             return json.loads(res.text)
         else:
             return json.loads('{"file": "' + data['file'] + '", "error": "File not found."}')
