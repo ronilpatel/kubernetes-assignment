@@ -8,10 +8,6 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-# This is the code for Container 1:
-# 1. Store the data in file
-# 2. Calculate the amount of given product
-
 
 def validate_request(payload):
     if payload and "file" in payload and payload['file'] is not None and payload['file'] != "":
