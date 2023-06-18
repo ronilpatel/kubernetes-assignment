@@ -24,6 +24,7 @@ def validate_file_data(payload):
 @app.route('/calculate', methods=['POST'])
 def calculate_sum():
     data = request.get_json()
+    print(".......")
     if validate_request(data):
         if path.exists("/Ronil_PV_dir/" + data['file']):
             res = requests.post("http://hello2service:80/calculate_sum", json=data)
