@@ -44,7 +44,6 @@ def store_file_to_persistent():
 
     if validate_file_data(data):
         try:
-            # with open("/Ronil_PV_dir/" + data.get("file"), "w") as f:
             file_name = "/Ronil_PV_dir/" + data.get("file")
             with open(file_name, "w") as f:
                 f.write(data.get("data"))
